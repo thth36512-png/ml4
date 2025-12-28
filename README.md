@@ -1,175 +1,260 @@
-GIU Food Truck Management System (Frontend)
-Overview
+GIU Food Truck Management System
+Project Description
 
-The GIU Food Truck Management System is a web-based platform that allows customers to browse food trucks, view menus, place orders, and track their purchases, while enabling food truck owners to manage their menus and orders through a dedicated dashboard.
+The GIU Food Truck Management System is a full-stack web application designed to connect customers with food truck owners through a modern, user-friendly interface.
+Customers can browse food trucks, view menus, place orders, and track their order history, while food truck owners can manage their menus, monitor incoming orders, and update order statuses.
 
-This repository focuses on the frontend application, which communicates with a RESTful backend API to handle authentication, data fetching, and real-time updates.
+This project demonstrates the implementation of role-based access control, RESTful API integration, and frontend–backend communication.
 
-Frontend Features
+Team Members
+Name	Student ID	Tutorial
+Ahmed ______	2020XXXX	TXX
+Member 2	2020XXXX	TXX
+Member 3	2020XXXX	TXX
+Features
 Customer Features
 
 User registration and login
 
 Browse available food trucks
 
-View truck menus by category
+View food truck menus
 
-Add items to cart and manage quantities
+Filter menu items by category
 
-Place orders and view order history
+Add items to shopping cart
 
-View detailed order information
+Edit or remove cart items
+
+Place orders
+
+View order history and order details
 
 Truck Owner Features
 
 Owner registration and login
 
-Owner dashboard overview
+Owner dashboard
 
-Manage menu items (add, edit, delete)
+Create, edit, and delete menu items
 
-View incoming orders
+View all orders related to their truck
 
-Update order status (e.g., pending, preparing, completed)
+Update order status
 
 Control truck availability
 
-Tech Stack (Frontend)
+Technology Stack
+Frontend
 
-HTML / CSS / JavaScript
+HTML
 
-Frontend framework (as implemented in the project)
+CSS
+
+JavaScript
 
 REST API integration
 
-Cookie-based or token-based authentication
+Backend
 
-Responsive UI design
+Node.js
 
-Setup Instructions (Frontend)
-1. Install Dependencies
+Express.js
+
+JWT Authentication
+
+bcrypt (password hashing)
+
+Database
+
+PostgreSQL
+
+pgAdmin4
+
+ERD (Entity Relationship Diagram)
+Entities and Tables
+
+Users
+
+userId (PK)
+
+name
+
+email
+
+password
+
+role
+
+birthDate
+
+Trucks
+
+truckId (PK)
+
+truckName
+
+truckLogo
+
+ownerId (FK → Users)
+
+MenuItems
+
+itemId (PK)
+
+name
+
+description
+
+price
+
+category
+
+truckId (FK → Trucks)
+
+Cart
+
+cartId (PK)
+
+userId (FK → Users)
+
+itemId (FK → MenuItems)
+
+quantity
+
+Orders
+
+orderId (PK)
+
+userId (FK → Users)
+
+truckId (FK → Trucks)
+
+status
+
+createdAt
+
+OrderItems
+
+orderItemId (PK)
+
+orderId (FK → Orders)
+
+itemId (FK → MenuItems)
+
+quantity
+
+price
+
+Installation and Setup
+1. Clone the Repository
+git clone https://github.com/your-username/giu-food-truck-system.git
+cd giu-food-truck-system
+
+2. Install Dependencies
 npm install
 
-2. Environment Configuration
+3. Database Setup
 
-Create a .env file in the root directory to connect the frontend with the backend API:
+Open pgAdmin4
 
+Create a PostgreSQL database
+
+Open Query Tool
+
+Run the SQL script located at:
+
+connectors/script.sql
+
+4. Environment Variables
+
+Create a .env file in the root directory:
+
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=postgres
+DB_PORT=5432
 PORT=3000
 NODE_ENV=development
 
-
-Make sure the backend server is running and accessible.
-
-3. Run the Frontend Application
+5. Run the Application
 npm run server
 
 
-The application will be available at:
+Access the application at:
 
 http://localhost:3000
 
+Test Credentials
+Customer Account
 
-Frontend Authentication Flow
+Email: customer@test.com
 
-Users register or log in through the UI
+Password: password123
 
-On successful login, the backend returns a JWT token
+Truck Owner Account
 
-The token is stored automatically in cookies or used via Authorization headers
+Email: owner@test.com
 
-Protected pages and actions require authentication
+Password: password123
 
-UI elements and routes are displayed based on user role (Customer / Truck Owner)
-
-API Integration Overview
-
-The frontend communicates with the backend using REST APIs for:
-
+Screenshots
 Authentication
 
-Register
+Login Page
 
-Login
+Register Page
 
-Get current user
+Customer Interface
 
-Logout
+Customer Dashboard
 
-Food Trucks
+Browse Food Trucks
 
-View all available trucks
+Truck Menu
 
-View owner’s truck details
+Shopping Cart
 
-Update truck availability
+My Orders
 
-Menu Items
+Truck Owner Interface
 
-View menus by truck
+Owner Dashboard
 
-Filter menu items by category
+Menu Management
 
-CRUD operations for truck owners
+Add Menu Item
 
-Cart & Orders
+Order Management
 
-Add, update, and remove cart items
+(Screenshots are available in the screenshots/ folder)
 
-Place orders
-
-View order history and details
-
-Update order status (truck owner)
-
-User Flow (Frontend)
-Customer Journey
-
-Register / Login
-
-Browse food trucks
-
-View menu items
-
-Add items to cart
-
-Place an order
-
-Track and view orders
-
-Truck Owner Journey
-
-Register / Login
-
-Access owner dashboard
-
-Manage menu items
-
-View incoming orders
-
-Update order statuses
-
-Error Handling (UI)
-
-Displays friendly error messages for failed requests
-
-Handles common API errors:
-
-Unauthorized access
-
-Invalid input
-
-Resource not found
-
-Server errors
-
+API Endpoints Summary
+Method	Endpoint	Description	Role
+POST	/api/v1/auth/register	Register user	Public
+POST	/api/v1/auth/login	Login user	Public
+GET	/api/v1/auth/me	Get current user	Authenticated
+POST	/api/v1/auth/logout	Logout	Authenticated
+GET	/api/v1/trucks/view	View trucks	Customer
+GET	/api/v1/menuItem/truck/:truckId	View truck menu	Customer
+POST	/api/v1/cart/new	Add to cart	Customer
+POST	/api/v1/order/new	Place order	Customer
+GET	/api/v1/order/truckOrders	View orders	Truck Owner
+PUT	/api/v1/order/updateStatus/:id	Update order	Truck Owner
+Contributors
+Name	Contribution
+Ahmed ______	Frontend UI, API Integration, Authentication
+Member 2	Backend Development, Database Design
+Member 3	ERD, Testing, Documentation
 Notes
 
-UI access is role-based (Customer vs Truck Owner)
+Role-based access control is enforced
 
-Authentication is required for all protected pages
+Passwords are encrypted using bcrypt
+
+JWT tokens are used for authentication
 
 Sessions expire after 24 hours
 
-Frontend dynamically updates based on API responses
-
-Designed for scalability and maintainability
+All protected routes require authentication
