@@ -6,11 +6,6 @@ Customers can browse food trucks, view menus, place orders, and track their orde
 
 This project demonstrates the implementation of role-based access control, RESTful API integration, and frontend–backend communication.
 
-Team Members
-Name	Student ID	Tutorial
-Ahmed ______	2020XXXX	TXX
-Member 2	2020XXXX	TXX
-Member 3	2020XXXX	TXX
 Features
 Customer Features
 
@@ -244,9 +239,9 @@ GET	/api/v1/order/truckOrders	View orders	Truck Owner
 PUT	/api/v1/order/updateStatus/:id	Update order	Truck Owner
 Contributors
 Name	Contribution
-Ahmed ______	Frontend UI, API Integration, Authentication
-Member 2	Backend Development, Database Design
-Member 3	ERD, Testing, Documentation
+Ahmed abdelhalim	Frontend UI, API Integration, Authentication
+ahmed yasser	Backend Development, Database Design
+yaqeen	ERD, Testing, Documentation
 Notes
 
 Role-based access control is enforced
