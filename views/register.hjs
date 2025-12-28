@@ -1,0 +1,72 @@
+<!-- views/register.hjs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh; padding-top: 0;">
+    <div class="row w-100 justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="text-center mb-4">
+          <h1 class="display-5 fw-bold text-primary">Join Us</h1>
+          <p class="lead text-muted">Create your account and start ordering.</p>
+        </div>
+        <div class="card shadow-lg border-0">
+          <div class="card-body p-5">
+            <form id="registerForm">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">Full Name</label>
+                  <input type="text" class="form-control bg-light" id="name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                   <label class="form-label text-muted">Birth Date</label>
+                  <input type="date" class="form-control bg-light" id="birthDate" required>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label text-muted">Email Address</label>
+                <input type="email" class="form-control bg-light" id="email" placeholder="name@example.com" required>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label text-muted">Password</label>
+                <input type="password" class="form-control bg-light" id="password" placeholder="••••••••" required>
+              </div>
+              
+              <div class="mb-4">
+                <label class="form-label text-muted">I want to...</label>
+                <select class="form-control bg-light form-select" id="role">
+                  <option value="customer">Order Food (Customer)</option>
+                  <option value="truckOwner">Sell Food (Truck Owner)</option>
+                </select>
+              </div>
+              
+              <div id="truckFields" class="d-none mb-4 p-3 bg-light rounded">
+                <label class="form-label fw-bold">Truck Details</label>
+                <input type="text" class="form-control" id="truckName" placeholder="Enter your truck name">
+                <small class="text-muted">This will be displayed to customers.</small>
+              </div>
+              
+              <div id="errorMessage" class="alert alert-danger d-none animate__animated animate__fadeIn"></div>
+              
+              <button type="submit" class="btn btn-primary w-100 btn-lg shadow-sm">Create Account</button>
+            </form>
+            <div class="mt-4 text-center">
+              <span class="text-muted">Already have an account?</span> 
+              <a href="/" class="fw-bold text-decoration-none">Sign In</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/register.js"></script>
+</body>
+</html>

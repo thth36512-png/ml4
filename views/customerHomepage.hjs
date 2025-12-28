@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Dashboard - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard">
+        <i class="glyphicon glyphicon-fire"></i>
+        GIU Food Truck
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3" style="color: var(--text-secondary); margin-right: 1rem;">
+          Welcome, <strong>{{user.name}}</strong>
+        </span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <!-- Hero Section -->
+    <div class="jumbotron text-center">
+      <h1 class="display-4">Hungry? We've Got You Covered.</h1>
+      <p class="lead">Discover the best food trucks on campus, order ahead, and skip the lines.</p>
+      <hr class="my-4" style="border-top: 1px solid rgba(255,255,255,0.2); margin: 2rem 0;" />
+      <a class="btn btn-light btn-lg" href="/trucks" role="button" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+        <i class="glyphicon glyphicon-search"></i> Start Ordering
+      </a>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row" style="margin-bottom: 3rem;">
+      <div class="col-md-4">
+        <a href="/trucks" class="text-decoration-none" style="text-decoration: none;">
+          <div class="card feature-card h-100 text-center">
+            <div class="card-body" style="padding: 3rem 2rem;">
+              <div class="menu-item-icon" style="margin-bottom: 1.5rem;">
+                <i class="glyphicon glyphicon-road" style="font-size: 2.5rem;"></i>
+              </div>
+              <h3 style="font-family: var(--font-display); font-weight: 700; margin-bottom: 1rem;">Browse Trucks</h3>
+              <p style="color: var(--text-secondary); line-height: 1.7;">
+                Explore a variety of cuisines from our top-rated food trucks on campus.
+              </p>
+              <span class="btn btn-primary" style="margin-top: 1rem;">View All Trucks</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/cart" class="text-decoration-none" style="text-decoration: none;">
+          <div class="card feature-card h-100 text-center">
+            <div class="card-body" style="padding: 3rem 2rem;">
+              <div class="menu-item-icon" style="margin-bottom: 1.5rem;">
+                <i class="glyphicon glyphicon-shopping-cart" style="font-size: 2.5rem;"></i>
+              </div>
+              <h3 style="font-family: var(--font-display); font-weight: 700; margin-bottom: 1rem;">Your Cart</h3>
+              <p style="color: var(--text-secondary); line-height: 1.7;">
+                Review your delicious selections and checkout with ease.
+              </p>
+              <span class="btn btn-primary" style="margin-top: 1rem;">Go to Cart</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/myOrders" class="text-decoration-none" style="text-decoration: none;">
+          <div class="card feature-card h-100 text-center">
+            <div class="card-body" style="padding: 3rem 2rem;">
+              <div class="menu-item-icon" style="margin-bottom: 1.5rem;">
+                <i class="glyphicon glyphicon-list-alt" style="font-size: 2.5rem;"></i>
+              </div>
+              <h3 style="font-family: var(--font-display); font-weight: 700; margin-bottom: 1rem;">Track Orders</h3>
+              <p style="color: var(--text-secondary); line-height: 1.7;">
+                Monitor the status of your current and past orders in real-time.
+              </p>
+              <span class="btn btn-primary" style="margin-top: 1rem;">My Orders</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="card" style="margin-top: 3rem;">
+      <div class="card-body" style="padding: 3rem;">
+        <h2 style="font-family: var(--font-display); font-weight: 700; text-align: center; margin-bottom: 3rem; font-size: 2rem;">
+          How It Works
+        </h2>
+        <div class="row text-center">
+          <div class="col-md-3" style="margin-bottom: 2rem;">
+            <div class="step-icon">1</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Browse</h4>
+            <p style="color: var(--text-secondary);">Find your favorite food truck</p>
+          </div>
+          <div class="col-md-3" style="margin-bottom: 2rem;">
+            <div class="step-icon" style="background: var(--gradient-accent);">2</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Select</h4>
+            <p style="color: var(--text-secondary);">Choose your perfect meal</p>
+          </div>
+          <div class="col-md-3" style="margin-bottom: 2rem;">
+            <div class="step-icon">3</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Order</h4>
+            <p style="color: var(--text-secondary);">Pay and set pickup time</p>
+          </div>
+          <div class="col-md-3" style="margin-bottom: 2rem;">
+            <div class="step-icon" style="background: var(--gradient-accent);">4</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Enjoy</h4>
+            <p style="color: var(--text-secondary);">Pick up your fresh food!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

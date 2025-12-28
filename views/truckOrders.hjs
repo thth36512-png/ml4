@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Truck Orders - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/ownerDashboard">
+        <i class="glyphicon glyphicon-fire"></i> GIU Truck Owner
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3 text-white">Welcome, {{user.name}}</span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container py-5">
+    <h2>Truck Orders Management</h2>
+    <p class="text-muted">Manage and track all orders for your truck</p>
+    
+    <!-- Filter Tabs -->
+    <ul class="nav nav-tabs mt-4" id="orderTabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-filter="all" href="#" onclick="filterOrders('all'); return false;">
+          All Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-filter="pending" href="#" onclick="filterOrders('pending'); return false;">
+          Pending
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-filter="preparing" href="#" onclick="filterOrders('preparing'); return false;">
+          Preparing
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-filter="ready" href="#" onclick="filterOrders('ready'); return false;">
+          Ready
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-filter="completed" href="#" onclick="filterOrders('completed'); return false;">
+          Completed
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-filter="cancelled" href="#" onclick="filterOrders('cancelled'); return false;">
+          Cancelled
+        </a>
+      </li>
+    </ul>
+    
+    <!-- Orders Container -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <div id="ordersContainer">
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/truckOrders.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

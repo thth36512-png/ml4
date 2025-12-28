@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Owner Dashboard - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <style>
+    .dashboard-header {
+      background: var(--gradient-dark);
+      color: white;
+      padding: 3rem 0;
+      border-radius: var(--radius-xl);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dashboard-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    .truck-info-card {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-hover) 100%);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .truck-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+    
+    .status-toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: var(--surface);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      transition: all 0.3s ease;
+    }
+    
+    .status-toggle-wrapper:hover {
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/ownerDashboard">
+        <i class="glyphicon glyphicon-fire"></i> GIU Truck Owner
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3" style="color: white; margin-right: 1rem;">
+          Welcome, <strong>{{user.name}}</strong>
+        </span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container py-5" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header text-center">
+      <h1 style="font-family: var(--font-display); font-weight: 900; font-size: 3rem; margin-bottom: 1rem;">
+        Owner Dashboard
+      </h1>
+      <p style="font-size: 1.25rem; opacity: 0.9;">
+        Manage your truck, menu, and orders all in one place
+      </p>
+    </div>
+    
+    <!-- Truck Info Card -->
+    <div class="truck-info-card">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 id="truckName" class="truck-name" style="margin-bottom: 1rem;">Loading...</h2>
+          <p style="color: var(--text-secondary); margin: 0;">
+            Current Status: <span id="truckStatus" class="badge" style="font-size: 1rem;">Loading...</span>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <div class="status-toggle-wrapper">
+            <input class="form-check-input" type="checkbox" id="orderStatusToggle" checked 
+                   style="width: 3.5em; height: 1.75em; cursor: pointer; margin: 0;">
+            <label class="form-check-label" for="orderStatusToggle" style="margin: 0; font-weight: 600; cursor: pointer;">
+              Accept Orders
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Statistics Cards -->
+    <div class="row" style="margin-bottom: 2rem;">
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="menu-item-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);">
+            <i class="glyphicon glyphicon-time" style="color: white; font-size: 2.5rem;"></i>
+          </div>
+          <h3 style="font-weight: 600; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem;">
+            Pending Orders
+          </h3>
+          <div class="stat-number" id="pendingOrders" style="color: var(--warning);">0</div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="menu-item-icon" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">
+            <i class="glyphicon glyphicon-ok-circle" style="color: white; font-size: 2.5rem;"></i>
+          </div>
+          <h3 style="font-weight: 600; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem;">
+            Completed Orders
+          </h3>
+          <div class="stat-number" id="completedOrders" style="color: var(--success);">0</div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="menu-item-icon">
+            <i class="glyphicon glyphicon-cog" style="font-size: 2.5rem;"></i>
+          </div>
+          <h3 style="font-weight: 600; color: var(--text-secondary); font-size: 1rem; margin-bottom: 1rem;">
+            Quick Actions
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <a href="/addMenuItem" class="btn btn-primary" style="width: 100%;">
+              <i class="glyphicon glyphicon-plus"></i> Add New Item
+            </a>
+            <a href="/menuItems" class="btn btn-light" style="width: 100%;">
+              <i class="glyphicon glyphicon-list"></i> Manage Menu
+            </a>
+            <a href="/truckOrders" class="btn btn-success" style="width: 100%;">
+              <i class="glyphicon glyphicon-th-list"></i> View Orders
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick Overview Card -->
+    <div class="card">
+      <div class="card-header">
+        <h3 style="margin: 0;">
+          <i class="glyphicon glyphicon-stats"></i> Business Overview
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-md-3">
+            <div style="padding: 1.5rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">
+                <span id="totalOrders">-</span>
+              </div>
+              <div style="color: var(--text-secondary); font-weight: 500;">Total Orders Today</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div style="padding: 1.5rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem;">
+                <span id="activeItems">-</span>
+              </div>
+              <div style="color: var(--text-secondary); font-weight: 500;">Active Menu Items</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div style="padding: 1.5rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--success); margin-bottom: 0.5rem;">
+                <span id="avgRating">-</span>
+              </div>
+              <div style="color: var(--text-secondary); font-weight: 500;">Average Rating</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div style="padding: 1.5rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--info); margin-bottom: 0.5rem;">
+                <span id="revenue">-</span>
+              </div>
+              <div style="color: var(--text-secondary); font-weight: 500;">Revenue Today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/ownerDashboard.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

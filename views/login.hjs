@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .login-card {
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-glow);
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .login-logo i {
+      font-size: 2.5rem;
+      color: white;
+    }
+    
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .brand-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    
+    .form-floating {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-floating .form-control {
+      padding: 1rem 1rem 1rem 3rem;
+      height: auto;
+    }
+    
+    .form-floating-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .form-floating .form-control:focus + .form-floating-icon {
+      color: var(--primary-color);
+    }
+    
+    .divider {
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border-color);
+    }
+    
+    .divider span {
+      background: var(--surface);
+      padding: 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    .d-none {
+      display: none;
+    }
+    
+    .footer-text {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .login-container {
+        padding: 1rem;
+      }
+      
+      .brand-title {
+        font-size: 1.75rem;
+      }
+      
+      .card-body {
+        padding: 2rem 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">
+          <i class="glyphicon glyphicon-fire"></i>
+        </div>
+        <h1 class="brand-title">GIU Food Truck</h1>
+        <p class="brand-subtitle">Order your favorite campus meals online</p>
+      </div>
+
+      <div class="card" style="border: 2px solid var(--border-color);">
+        <div class="card-body" style="padding: 2.5rem;">
+          <h2 style="font-family: var(--font-display); font-weight: 700; text-align: center; margin-bottom: 2rem; font-size: 1.75rem;">
+            Welcome Back
+          </h2>
+          
+          <form id="loginForm">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+              <span class="form-floating-icon">
+                <i class="glyphicon glyphicon-envelope"></i>
+              </span>
+            </div>
+            
+            <div class="form-floating">
+              <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+              <span class="form-floating-icon">
+                <i class="glyphicon glyphicon-lock"></i>
+              </span>
+            </div>
+            
+            <div id="errorMessage" class="alert alert-danger d-none" style="margin-bottom: 1.5rem;"></div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem; font-weight: 600;">
+              <i class="glyphicon glyphicon-log-in"></i> Sign In
+            </button>
+          </form>
+          
+          <div class="divider">
+            <span>New to GIU Food Truck?</span>
+          </div>
+          
+          <div style="text-align: center;">
+            <a href="/register" class="btn btn-light" style="width: 100%; padding: 1rem; text-decoration: none;">
+              Create an Account
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-text">
+        <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/login.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <title>Login - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .login-card {
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-glow);
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .login-logo i {
+      font-size: 2.5rem;
+      color: white;
+    }
+    
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .brand-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    
+    .form-floating {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-floating .form-control {
+      padding: 1rem 1rem 1rem 3rem;
+      height: auto;
+    }
+    
+    .form-floating-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .form-floating .form-control:focus + .form-floating-icon {
+      color: var(--primary-color);
+    }
+    
+    .divider {
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border-color);
+    }
+    
+    .divider span {
+      background: var(--surface);
+      padding: 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    .d-none {
+      display: none;
+    }
+    
+    .footer-text {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .login-container {
+        padding: 1rem;
+      }
+      
+      .brand-title {
+        font-size: 1.75rem;
+      }
+      
+      .card-body {
+        padding: 2rem 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">
+          <i class="glyphicon glyphicon-fire"></i>
+        </div>
+        <h1 class="brand-title">GIU Food Truck</h1>
+        <p class="brand-subtitle">Order your favorite campus meals online</p>
+      </div>
+
+      <div class="card" style="border: 2px solid var(--border-color);">
+        <div class="card-body" style="padding: 2.5rem;">
+          <h2 style="font-family: var(--font-display); font-weight: 700; text-align: center; margin-bottom: 2rem; font-size: 1.75rem;">
+            Welcome Back
+          </h2>
+          
+          <form id="loginForm">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+              <span class="form-floating-icon">
+                <i class="glyphicon glyphicon-envelope"></i>
+              </span>
+            </div>
+            
+            <div class="form-floating">
+              <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+              <span class="form-floating-icon">
+                <i class="glyphicon glyphicon-lock"></i>
+              </span>
+            </div>
+            
+            <div id="errorMessage" class="alert alert-danger d-none" style="margin-bottom: 1.5rem;"></div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem; font-weight: 600;">
+              <i class="glyphicon glyphicon-log-in"></i> Sign In
+            </button>
+          </form>
+          
+          <div class="divider">
+            <span>New to GIU Food Truck?</span>
+          </div>
+          
+          <div style="text-align: center;">
+            <a href="/register" class="btn btn-light" style="width: 100%; padding: 1rem; text-decoration: none;">
+              Create an Account
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-text">
+        <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/login.js"></script>
+</body>
+</html>

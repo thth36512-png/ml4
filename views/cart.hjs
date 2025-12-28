@@ -1,0 +1,50 @@
+<!-- views/cart.hjs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard">
+        <i class="glyphicon glyphicon-cutlery"></i> GIU Food Truck
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3 text-white">Welcome, {{user.name}}</span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container py-5">
+    <h2>Shopping Cart</h2>
+    <div id="cartContainer" class="mt-4"></div>
+    <div id="emptyCart" class="alert alert-info d-none">
+      Your cart is empty. <a href="/trucks">Browse Trucks</a>
+    </div>
+    <div id="orderSection" class="d-none">
+      <h4>Total: $<span id="totalPrice">0.00</span></h4>
+      <div class="mb-3">
+        <label>Pickup Time:</label>
+        <input type="datetime-local" id="pickupTime" class="form-control">
+      </div>
+      <button class="btn btn-success" onclick="placeOrder()">Place Order</button>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/cart.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

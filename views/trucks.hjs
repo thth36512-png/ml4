@@ -1,0 +1,39 @@
+<!-- views/trucks.hjs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Browse Trucks</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard">
+        <i class="glyphicon glyphicon-cutlery"></i> GIU Food Truck
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3 text-white">Welcome, {{user.name}}</span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container py-5">
+    <h2>Available Food Trucks</h2>
+    <div id="trucksContainer" class="row mt-4"></div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/trucks.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

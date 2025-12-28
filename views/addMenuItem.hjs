@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Menu Item - GIU Food Truck</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/ownerDashboard">
+        <i class="glyphicon glyphicon-fire"></i> GIU Truck Owner
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="navbar-text me-3 text-white">Welcome, {{user.name}}</span>
+        <button class="btn btn-light btn-sm" onclick="logout()">
+          <i class="glyphicon glyphicon-log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3>Add New Menu Item</h3>
+          </div>
+          <div class="card-body">
+            <form id="addItemForm">
+              <div class="mb-3">
+                <label class="form-label">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" placeholder="e.g., Beef Burger" required>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Category <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="category" 
+                       placeholder="e.g., Main Course, Sides, Beverages" required>
+                <small class="form-text text-muted">Examples: Main Course, Sides, Beverages, Desserts</small>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="3" 
+                          placeholder="Describe your menu item..."></textarea>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Price (EGP) <span class="text-danger">*</span></label>
+                <input type="number" step="0.01" min="0" class="form-control" id="price" 
+                       placeholder="0.00" required>
+              </div>
+              
+              <div id="errorMessage" class="alert alert-danger d-none"></div>
+              
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Add Menu Item</button>
+                <a href="/menuItems" class="btn btn-secondary">Cancel</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/jquery-2.2.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/src/addMenuItem.js"></script>
+  <script>
+    function logout() {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>
